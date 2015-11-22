@@ -20,8 +20,9 @@ debug = debug("tessera");
 module.exports = function(opts, callback) {
   var app = express().disable("x-powered-by"),
       tilelive = require("tilelive-cache")(require("tilelive"), {
-        size: process.env.CACHE_SIZE || opts.cacheSize,
-        sources: process.env.SOURCE_CACHE_SIZE || opts.sourceCacheSize
+        size: process.env.CACHE_SIZE || opts.cacheSize || 10,
+        sources: process.env.SOURCE_CACHE_SIZE || opts.sourceCacheSize || 6,
+        cacheDelay: process.env.CACHE_DELAY || opts.cacheDelay || 30
       });
 
   callback = callback || function() {};
